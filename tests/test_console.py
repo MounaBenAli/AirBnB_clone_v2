@@ -21,6 +21,7 @@ from models.review import Review
 
 class Test_Console_Docs(unittest.TestCase):
     """Test documentation"""
+
     def test_doc(self):
         self.assertIsNotNone(HBNBCommand.__doc__)
         self.assertIsNotNone(HBNBCommand.emptyline.__doc__)
