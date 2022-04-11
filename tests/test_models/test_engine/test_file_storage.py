@@ -4,6 +4,26 @@ import unittest
 from models.base_model import BaseModel
 from models import storage
 import os
+from models.engine.file_storage import FileStorage
+import pep8
+from models.__init__ import storage
+
+
+class Test_FileStorage_Docs(unittest.TestCase):
+    """Test documentation"""
+
+    def test_doc(self):
+        self.assertIsNotNone(FileStorage.__doc__)
+        self.assertIsNotNone(FileStorage.all.__doc__)
+        self.assertIsNotNone(FileStorage.new.__doc__)
+        self.assertIsNotNone(FileStorage.save.__doc__)
+        self.assertIsNotNone(FileStorage.reload.__doc__)
+
+    def test_style_check(self):
+        """Test pep8 style"""
+        style = pep8.StyleGuide(quiet=True)
+        p = style.check_files(['models/engine/file_storage.py'])
+        self.assertEqual(p.total_errors, 0, "fix pep8")
 
 
 class test_fileStorage(unittest.TestCase):
@@ -21,7 +41,7 @@ class test_fileStorage(unittest.TestCase):
         """ Remove storage file at end of tests """
         try:
             os.remove('file.json')
-        except:
+        except BaseException:
             pass
 
     def test_obj_list_empty(self):
