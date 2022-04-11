@@ -6,6 +6,24 @@ import datetime
 from uuid import UUID
 import json
 import os
+import pep8
+
+
+class Test_BaseModel_Docs(unittest.TestCase):
+    """Test documentation"""
+
+    def test_doc(self):
+        self.assertIsNotNone(BaseModel.__doc__)
+        self.assertIsNotNone(BaseModel.__init__.__doc__)
+        self.assertIsNotNone(BaseModel.__str__.__doc__)
+        self.assertIsNotNone(BaseModel.save.__doc__)
+        self.assertIsNotNone(BaseModel.to_dict.__doc__)
+
+    def test_style_check(self):
+        """Test pep8 style"""
+        style = pep8.StyleGuide(quiet=True)
+        p = style.check_files(['models/base_model.py'])
+        self.assertEqual(p.total_errors, 0, "fix pep8")
 
 
 class test_basemodel(unittest.TestCase):
@@ -24,7 +42,7 @@ class test_basemodel(unittest.TestCase):
     def tearDown(self):
         try:
             os.remove('file.json')
-        except:
+        except BaseException:
             pass
 
     def test_default(self):
@@ -60,7 +78,7 @@ class test_basemodel(unittest.TestCase):
         """ """
         i = self.value()
         self.assertEqual(str(i), '[{}] ({}) {}'.format(self.name, i.id,
-                         i.__dict__))
+                                                       i.__dict__))
 
     def test_todict(self):
         """ """
