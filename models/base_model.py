@@ -1,12 +1,10 @@
 #!/usr/bin/python3
 """This module defines a base class for all models in our hbnb clone"""
-from email.policy import default
-from tkinter.tix import COLUMN
 import uuid
 from datetime import datetime
 from sqlalchemy import DateTime, String, Column
 from sqlalchemy.ext.declarative import declarative_base
-from models import storage
+from . import storage
 
 Base = declarative_base()
 

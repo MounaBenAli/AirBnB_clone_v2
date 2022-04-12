@@ -1,10 +1,9 @@
 #!/usr/bin/python3
 """ State Module for HBNB project """
-from models.base_model import BaseModel
+from .base_model import BaseModel
 from sqlalchemy import Column, String
 from sqlalchemy.orm import relationship
-import models
-from models import City
+from . import storage, storage_type
 
 
 class State(BaseModel):
@@ -18,7 +17,7 @@ class State(BaseModel):
         """inherited init"""
         super.__init__(*args, **kwargs)
 
-    if models.storage_type != "db":
+    if storage_type != "db":
         @property
         def cities(self):
             """
@@ -26,7 +25,7 @@ class State(BaseModel):
             a list of city instances
             """
             city_list = []
-            instances = models.storage.all()
+            instances = storage.all()
             for value in instances.values():
                 if value.state_id == self.id:
                     city_list.append(value)
