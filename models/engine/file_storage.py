@@ -1,7 +1,6 @@
 #!/usr/bin/python3
 """This module defines a class to manage file storage for hbnb clone"""
 import json
-import models
 
 
 class FileStorage:
@@ -10,21 +9,21 @@ class FileStorage:
     __objects = {}
 
     def all(self, cls=None):
-        """Returns the list of objects of one type of class"""
+        """Returns the list of objects of one type of class."""
+        obj_dict = {}
         if cls is not None:
-            _dict = {}
             for k, v in self.__objects.items():
-                if isinstance(v, cls):
-                    _dict[k] = v
-            return _dict
-        return self.__objects
+                if type(v) == cls:
+                    obj_dict[k] = v
+            return obj_dict
+        return FileStorage.__objects
 
     def delete(self, obj=None):
         """Deletes obj from __object"""
         if obj is not None:
-            key = '{}.{}'.format(obj.__class__.__name__, obj.id)
-        if key in self.__objects:
-            del self.__objects[key]
+            key = obj.__class__.__name__+'.'+obj.id
+            if key in self.__objects:
+                del self.__objects[key]
 
     def new(self, obj):
         """Adds new object to storage dictionary"""
@@ -50,10 +49,10 @@ class FileStorage:
         from models.review import Review
 
         classes = {
-            'BaseModel': BaseModel, 'User': User, 'Place': Place,
-            'State': State, 'City': City, 'Amenity': Amenity,
-            'Review': Review
-        }
+                    'BaseModel': BaseModel, 'User': User, 'Place': Place,
+                    'State': State, 'City': City, 'Amenity': Amenity,
+                    'Review': Review
+                  }
         try:
             temp = {}
             with open(FileStorage.__file_path, 'r') as f:
