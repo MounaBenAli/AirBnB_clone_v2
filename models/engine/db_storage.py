@@ -3,10 +3,15 @@
 DataBase Storage Module
 """
 from os import getenv
-import sqlalchemy
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, scoped_session
-from ..base_model import Base
+from ..amenity import Amenity
+from ..base_model import BaseModel, Base
+from ..city import City
+from ..place import Place
+from ..review import Review
+from ..state import State
+from ..user import User
 
 
 class DBStorage:
