@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """ Console Module """
 import cmd
+import shlex
 import sys
 from models.base_model import BaseModel
 from models.__init__ import storage
@@ -16,7 +17,7 @@ class HBNBCommand(cmd.Cmd):
     """ Contains the functionality for the HBNB console"""
 
     # determines prompt for interactive/non-interactive modes
-    prompt = '(hbnb) ' if sys.__stdin__.isatty() else ''
+    prompt = '(hbnb) '
 
     classes = {
         'BaseModel': BaseModel, 'User': User, 'Place': Place,
@@ -30,12 +31,7 @@ class HBNBCommand(cmd.Cmd):
         'latitude': float, 'longitude': float
     }
 
-    def preloop(self):
-        """Prints if isatty is false"""
-        if not sys.__stdin__.isatty():
-            print('(hbnb)')
-
-    def precmd(self, line):
+    def _argsparser(self, line):
         """Reformat command line for advanced command syntax.
 
         Usage: <class name>.<command>([<id> [<*args> or <**kwargs>]])
@@ -43,7 +39,7 @@ class HBNBCommand(cmd.Cmd):
         """
         dictionnary = {}
         for l in line:
-            if '=' in l:
+            if "=" in l:
                 new_arg = l.split("=", 1)
                 key = new_arg[0]
                 value = new_arg[1]
@@ -58,13 +54,8 @@ class HBNBCommand(cmd.Cmd):
                         except Exception:
                             continue
                 dictionnary[key] = value
+        print(dictionnary)
         return dictionnary
-
-    def postcmd(self, stop, line):
-        """Prints if isatty is false"""
-        if not sys.__stdin__.isatty():
-            print('(hbnb) ', end='')
-        return stop
 
     def do_quit(self, command):
         """ Method to exit the HBNB console"""
@@ -90,17 +81,17 @@ class HBNBCommand(cmd.Cmd):
     def do_create(self, args):
         """ Create an object of any class"""
         args = args.split()
+        dictionnary = {}
         if not args[0]:
             print("** class name missing **")
             return
         elif args[0] not in HBNBCommand.classes:
             print("** class doesn't exist **")
             return
-        dictionnary = self.precmd(args[1:])
+        dictionnary = self._argsparser(args[1:])
         new_instance = HBNBCommand.classes[args[0]](**dictionnary)
-        storage.save()
         print(new_instance.id)
-        storage.save()
+        new_instance.save()
 
     def help_create(self):
         """ Help information for the create method """

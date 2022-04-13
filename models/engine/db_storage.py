@@ -3,6 +3,7 @@
 DataBase Storage Module
 """
 from os import getenv
+import sqlalchemy
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, scoped_session
 from ..amenity import Amenity
