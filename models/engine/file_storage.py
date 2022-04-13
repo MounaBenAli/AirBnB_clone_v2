@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """This module defines a class to manage file storage for hbnb clone"""
 import json
+from time import clock_settime_ns
 
 
 class FileStorage:
@@ -14,7 +15,7 @@ class FileStorage:
             return FileStorage.__objects
         obj = {}
         for x in FileStorage.__objects:
-            if type(FileStorage.__objects[x]) == cls:
+            if x.split('.')[0] == cls:
                 obj[x] = FileStorage.__objects[x]
         return obj
 
