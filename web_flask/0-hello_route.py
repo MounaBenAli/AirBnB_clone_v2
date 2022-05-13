@@ -1,5 +1,9 @@
 #!/usr/bin/python3
-"""Starting Flask Web application """
+"""
+Starting Flask Web application
+listening on 0.0.0.0, port 5000
+Route : /: display “Hello HBNB!”
+"""
 
 from flask import Flask
 
