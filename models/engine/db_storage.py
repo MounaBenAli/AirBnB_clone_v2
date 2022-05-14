@@ -2,17 +2,14 @@
 """
 DataBase Storage Module
 """
+
 from os import getenv, remove
 import sqlalchemy
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, scoped_session
-from ..amenity import Amenity
-from ..base_model import BaseModel, Base
-from ..city import City
-from ..place import Place
-from ..review import Review
-from ..state import State
-from ..user import User
+from models.base_model import Base
+from models import base_model, amenity, city, place, review, state, user
+
 
 
 class DBStorage:
@@ -76,6 +73,7 @@ class DBStorage:
         """
         if obj is not None:
             self.__session.delete(obj)
+            self.save()
 
     def reload(self):
         """
@@ -86,6 +84,3 @@ class DBStorage:
         Session = scoped_session(db_session)
         self.__session = Session()
 
-    def close(self):
-        '''call remove() method on the private session attribute'''
-        self.__session.remove()
