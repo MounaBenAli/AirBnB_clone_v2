@@ -2,7 +2,7 @@
 """
 DataBase Storage Module
 """
-from os import getenv
+from os import getenv, remove
 import sqlalchemy
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, scoped_session
@@ -85,3 +85,7 @@ class DBStorage:
         db_session = sessionmaker(bind=self.__engine, expire_on_commit=False)
         Session = scoped_session(db_session)
         self.__session = Session()
+
+    def close(self):
+        '''call remove() method on the private session attribute'''
+        remove(self.__session)
