@@ -15,7 +15,7 @@ class State(BaseModel, Base):
 
     def __init__(self, *args, **kwargs):
         """inherited init"""
-        super.__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
 
     if storage_type != "db":
         @property
