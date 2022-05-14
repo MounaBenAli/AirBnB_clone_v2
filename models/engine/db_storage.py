@@ -11,7 +11,6 @@ from models.base_model import Base
 from models import base_model, amenity, city, place, review, state, user
 
 
-
 class DBStorage:
     """
     DataBase Storage Class
@@ -85,5 +84,5 @@ class DBStorage:
         self.__session = Session()
 
     def close(self):
-        '''call remove() method on the private session attribute (self.__session)'''
+        '''call close() method on Session'''
         self.__session.close()
