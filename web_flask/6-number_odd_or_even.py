@@ -6,7 +6,8 @@ Routes : /: display “Hello HBNB!”
          /hbnb: display “HBNB”
          /c/<text>: display “C ” followed by the value of the text
          variable
-         /python/(<text>):display “Python ”, followed by the value of the text variable
+         /python/(<text>):display “Python ”,
+         followed by the value of the text variable
          The default value of text is “is cool”
          /number/<n>: display “n is a number” only if n is an integer
          /number_template/<n>: display a HTML page only if n is an integer:
@@ -58,10 +59,9 @@ def number_temp(n=None):
 
 
 @app.route('/number_odd_or_even/<int:n>', strict_slashes=False)
-def number_odd_even(n=None)
-
-""""""
-return render_template('6-number_odd_or_even.html', n=n)
+def number_odd_even(n=None):
+    """"""
+    return render_template('6-number_odd_or_even.html', n=n)
 
 
 if __name__ == "__main__":

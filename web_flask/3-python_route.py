@@ -6,7 +6,8 @@ Routes : /: display “Hello HBNB!”
          /hbnb: display “HBNB”
          /c/<text>: display “C ” followed by the value of the text
          variable
-         /python/(<text>):display “Python ”, followed by the value of the text variable
+         /python/(<text>):display “Python ”,
+         followed by the value of the text variable
          The default value of text is “is cool”
 """
 
