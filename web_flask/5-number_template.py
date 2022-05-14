@@ -20,32 +20,38 @@ app = Flask(__name__)
 
 @app.route('/', strict_slashes=False)
 def hello():
+    """"""
     return 'Hello HBNB!'
 
 
 @app.route('/hbnb', strict_slashes=False)
 def hbnb():
+    """"""
     return 'HBNB'
 
 
 @app.route('/c/<text>', strict_slashes=False)
 def C(text):
+    """"""
     return 'C %s' % text
 
 
 @app.route('/python/', strict_slashes=False)
 @app.route('/python/<text>', strict_slashes=False)
 def Python(text="is cool"):
+    """"""
     return 'Python %s' % text
 
 
 @app.route('/number/<int:n>', strict_slashes=False)
 def numbers(n):
+    """"""
     return '%s is a number' % n
 
 
 @app.route('/number_template/<int:n>', strict_slashes=False)
 def number_temp(n=None):
+    """"""
     return render_template('5-number.html', n=n)
 
 
