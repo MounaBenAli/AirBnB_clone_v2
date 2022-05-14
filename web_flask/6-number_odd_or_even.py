@@ -59,8 +59,9 @@ def number_temp(n=None):
 
 @app.route('/number_odd_or_even/<int:n>', strict_slashes=False)
 def number_odd_even(n=None)
-    """"""
-    return render_template('6-number_odd_or_even.html', n=n)
+
+""""""
+return render_template('6-number_odd_or_even.html', n=n)
 
 
 if __name__ == "__main__":
